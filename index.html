@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#1cb0f6" />
+  <meta name="description" content="Simulados e flashcards para o Processo Seletivo Professor Piracicaba 2026." />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icon-192.png" />
+  <title>Piracicaba 2026 • Treino Professor</title>
+  <style>
+    :root{
+      --bg:#f6f8fc; --card:#fff; --ink:#17324d; --muted:#6f7f91;
+      --blue:#1cb0f6; --blue2:#0b8fd3; --green:#58cc02; --green2:#46a302;
+      --yellow:#ffc800; --red:#ff4b4b; --purple:#9b5de5; --border:#e7edf4;
+      --shadow:0 10px 28px rgba(29,64,96,.10); --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:linear-gradient(180deg,#eef9ff 0,#f7f8fc 30%,#f7f8fc 100%);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    body{min-height:100vh}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    .app{max-width:980px;margin:auto;padding:18px 16px 44px}
+    header{display:flex;gap:14px;align-items:center;justify-content:space-between;margin:4px 0 18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,var(--blue),#5ecbff);display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:0 7px 0 #0c8bc4;font-size:18px}
+    h1{font-size:clamp(22px,4vw,34px);line-height:1.05;margin:0}
+    .subtitle{margin-top:5px;color:var(--muted);font-size:14px}
+    .iconBtn{border:2px solid var(--border);background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 4px 0 #dbe5ee;color:var(--ink);font-weight:800}
+    .hero{background:linear-gradient(135deg,#fff,#f9fdff);border:2px solid #d9effb;border-radius:28px;padding:20px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.25fr .75fr;gap:18px;align-items:center}
+    .hero h2{font-size:clamp(24px,4vw,40px);margin:0 0 8px}
+    .hero p{margin:0;color:var(--muted);line-height:1.5}
+    .examBox{background:#fff7d7;border:2px solid #ffe17a;border-radius:20px;padding:16px;text-align:center}
+    .examBox b{display:block;font-size:24px;color:#8a6500}
+    .examBox span{font-size:13px;color:#745d1b}
+    .profile{margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .profileRow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}
+    label{font-size:13px;font-weight:800;color:#526578;display:block;margin-bottom:7px}
+    input{width:100%;border:2px solid #dbe7f0;border-radius:15px;padding:13px 14px;outline:none;background:#fbfdff;color:var(--ink);font-weight:700;letter-spacing:.6px}
+    input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(28,176,246,.12)}
+    .primary{border:0;background:var(--green);color:white;font-weight:900;border-radius:15px;padding:13px 18px;box-shadow:0 5px 0 var(--green2)}
+    .primary:active{transform:translateY(3px);box-shadow:0 2px 0 var(--green2)}
+    .helper{font-size:12px;color:var(--muted);margin-top:7px}
+    .error{color:#d83434;font-weight:700}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+    .stat{background:#fff;border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+    .stat span{display:block;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}
+    .stat b{font-size:26px;margin-top:3px;display:block}
+    .sectionTitle{font-size:18px;font-weight:950;margin:22px 2px 11px}
+    .menu{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .menuBtn{min-height:150px;border:0;border-radius:24px;padding:18px;text-align:left;color:white;position:relative;overflow:hidden;box-shadow:0 8px 0 rgba(0,0,0,.13);transition:.18s transform}
+    .menuBtn:hover{transform:translateY(-2px)}
+    .menuBtn:active{transform:translateY(5px);box-shadow:0 3px 0 rgba(0,0,0,.13)}
+    .menuBtn .emoji{font-size:38px;display:block;margin-bottom:18px}
+    .menuBtn strong{font-size:21px;display:block;line-height:1.05}
+    .menuBtn small{display:block;margin-top:7px;opacity:.9;font-weight:750}
+    .pt{background:linear-gradient(135deg,#ff6b6b,#ff4b4b)}
+    .math{background:linear-gradient(135deg,#3fc2ff,#168ed6)}
+    .spec{background:linear-gradient(135deg,#8bdc36,#4cb900)}
+    .flashMain{margin-top:14px;background:#fff;border:1px solid var(--border);border-radius:24px;padding:14px;box-shadow:var(--shadow)}
+    .flashToggle{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;background:linear-gradient(135deg,#9b5de5,#7a42ce);color:#fff;border-radius:18px;padding:16px 18px;font-weight:950;font-size:18px;box-shadow:0 6px 0 #6233a8}
+    .flashSub{display:none;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.flashSub.open{display:grid}
+    .flashSub button{border:2px solid var(--border);background:#fff;border-radius:16px;padding:14px;font-weight:900;color:var(--ink);box-shadow:0 4px 0 #dfe7ee}
+    .source{margin-top:18px;padding:14px 16px;border-left:5px solid var(--blue);background:#eefaff;border-radius:12px;color:#4c6276;font-size:13px;line-height:1.45}
+    .view{display:none;margin-top:16px}.view.active{display:block}
+    .quizTop,.fcTop{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .back{border:2px solid var(--border);background:white;border-radius:13px;padding:9px 12px;font-weight:900;color:var(--ink);box-shadow:0 3px 0 #dfe7ee}
+    .grow{flex:1}
+    .progress{height:13px;background:#e9eef3;border-radius:999px;overflow:hidden}.progress>i{display:block;height:100%;width:0;background:var(--green);border-radius:999px;transition:.25s}
+    .qCard{background:#fff;border:1px solid var(--border);border-radius:26px;padding:22px;box-shadow:var(--shadow)}
+    .badge{display:inline-flex;align-items:center;gap:7px;background:#eef7ff;color:#1677b5;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;margin-bottom:10px}
+    .qText{font-size:clamp(18px,3vw,24px);font-weight:850;line-height:1.35;margin:2px 0 16px;white-space:pre-line}
+    .opts{display:grid;gap:10px}
+    .opt{display:grid;grid-template-columns:40px 1fr;gap:11px;align-items:center;text-align:left;border:2px solid #dfe8ef;background:#fff;border-radius:16px;padding:11px 13px;color:var(--ink);font-weight:700;transition:.15s}
+    .opt:hover{border-color:#a7dff6;background:#f8fdff}
+    .letter{width:34px;height:34px;border-radius:10px;border:2px solid #dce6ee;display:grid;place-items:center;font-weight:950;background:#f8fafc}
+    .opt.correct{border-color:#77ca30;background:#efffe5}.opt.correct .letter{background:var(--green);border-color:var(--green);color:#fff}
+    .opt.wrong{border-color:#ff7b7b;background:#fff0f0}.opt.wrong .letter{background:var(--red);border-color:var(--red);color:#fff}
+    .opt.locked{cursor:default}
+    .hintBtn{margin-top:13px;border:0;background:#fff8d5;color:#876500;border-radius:12px;padding:10px 12px;font-weight:850}
+    .hint{display:none;margin-top:9px;background:#fff9e8;border:1px solid #ffe393;padding:11px 13px;border-radius:12px;color:#765d0b}.hint.show{display:block}
+    .feedback{display:none;margin-top:16px;border-radius:16px;padding:14px 15px;font-weight:750;line-height:1.45}.feedback.show{display:block}.feedback.ok{background:#efffe6;color:#286d05;border:1px solid #b9ec97}.feedback.no{background:#fff0f0;color:#9b2d2d;border:1px solid #ffb4b4}
+    .nextRow{display:flex;justify-content:flex-end;margin-top:14px}.nextBtn{display:none;border:0;background:var(--blue);color:white;font-weight:950;border-radius:14px;padding:12px 18px;box-shadow:0 5px 0 var(--blue2)}.nextBtn.show{display:inline-block}
+    .result{text-align:center;padding:25px}.scoreRing{width:150px;height:150px;margin:8px auto 16px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) var(--deg,0deg),#e7edf3 0);position:relative}.scoreRing:after{content:"";position:absolute;inset:13px;border-radius:50%;background:#fff}.scoreRing b{position:relative;z-index:1;font-size:32px}.result h2{font-size:28px;margin:0 0 8px}.result p{color:var(--muted)}
+    .fcWrap{perspective:1000px}.flashCard{min-height:330px;position:relative;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}.flashCard.flipped{transform:rotateY(180deg)}
+    .face{position:absolute;inset:0;backface-visibility:hidden;background:#fff;border:2px solid #e1e8ef;border-radius:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px}.face.backFace{transform:rotateY(180deg);background:linear-gradient(145deg,#f4fff0,#fff)}
+    .fcLabel{font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:15px}.face strong{font-size:clamp(22px,4vw,34px);line-height:1.22}.backFace strong{color:#286d05}.tapHelp{margin-top:18px;font-size:13px;color:#8a99a8;font-weight:700}
+    .fcControls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.fcControls button{border:0;border-radius:16px;padding:13px;font-weight:950}.review{background:#fff0f0;color:#b43838;border:2px solid #ffc2c2!important}.know{background:#efffe7;color:#327c0d;border:2px solid #b9ec97!important}
+    .fcNav{display:flex;justify-content:space-between;align-items:center;margin-top:12px;color:var(--muted);font-weight:800}.fcNav button{border:2px solid var(--border);background:#fff;border-radius:12px;padding:9px 12px;font-weight:900;color:var(--ink)}
+    .toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,120px);background:#17324d;color:#fff;padding:11px 16px;border-radius:999px;font-weight:800;transition:.25s;z-index:20;box-shadow:var(--shadow)}.toast.show{transform:translate(-50%,0)}
+    footer{text-align:center;color:#8795a3;font-size:12px;margin-top:24px;line-height:1.5}
+    @media(max-width:760px){.hero{grid-template-columns:1fr}.menu{grid-template-columns:1fr}.menuBtn{min-height:118px}.flashSub{grid-template-columns:1fr}.profileRow{grid-template-columns:1fr}.stats{gap:8px}.stat b{font-size:22px}.qCard{padding:16px}.opt{grid-template-columns:36px 1fr}.hero{padding:17px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><div class="logo">P26</div><div><h1>Piracicaba 2026</h1><div class="subtitle">Treino para Professor Substituto • AVANÇASP</div></div></div>
+    <button id="soundBtn" class="iconBtn" aria-label="Ativar ou desativar sons">🔊 Sons</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div><h2>Questões + flashcards, tudo offline.</h2><p>Simulado no formato do edital: Português, Matemática e Raciocínio Lógico e Conhecimentos Específicos. Respostas com feedback imediato, dicas, pontuação e revisão por flashcards.</p></div>
+      <div class="examBox"><span>PROVA OBJETIVA</span><b>50 questões</b><span>10 Português • 10 Matemática • 30 Específicos</span></div>
+    </section>
+
+    <section class="profile">
+      <div class="profileRow">
+        <div><label for="cpf">CPF do candidato (opcional)</label><input id="cpf" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00" /><div id="cpfMsg" class="helper">Máscara automática. O CPF não é enviado e não é salvo.</div></div>
+        <button class="primary" id="saveProfile">Validar CPF</button>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="stat"><span>Respondidas</span><b id="stAnswered">0</b></div>
+      <div class="stat"><span>Acertos</span><b id="stCorrect">0</b></div>
+      <div class="stat"><span>Aproveitamento</span><b id="stRate">0%</b></div>
+    </div>
+
+    <div class="sectionTitle">Simulados por disciplina</div>
+    <section class="menu">
+      <button class="menuBtn pt" data-quiz="pt"><span class="emoji">📚</span><strong>Português</strong><small>10 questões • A–E</small></button>
+      <button class="menuBtn math" data-quiz="math"><span class="emoji">🧠</span><strong>Matemática</strong><small>10 questões • raciocínio lógico</small></button>
+      <button class="menuBtn spec" data-quiz="spec"><span class="emoji">🎓</span><strong>Conhecimentos Específicos</strong><small>30 questões • educação e legislação</small></button>
+    </section>
+
+    <section class="flashMain">
+      <button class="flashToggle" id="flashToggle"><span>🃏 Flashcards</span><span id="flashArrow">▾</span></button>
+      <div class="flashSub" id="flashSub">
+        <button data-flash="pt">📕 Português<br><small>15 flashcards</small></button>
+        <button data-flash="math">📘 Matemática<br><small>15 flashcards</small></button>
+        <button data-flash="spec">📗 Conhecimentos Específicos<br><small>30 flashcards</small></button>
+      </div>
+    </section>
+
+    <div class="source"><b>Base do conteúdo:</b> Anexo II do Processo Seletivo 01/2026 da Prefeitura de Piracicaba. O app reproduz a distribuição de 10 + 10 + 30 questões prevista para a prova.</div>
+  </main>
+
+  <section id="quizView" class="view">
+    <div class="quizTop"><button class="back" data-home>← Início</button><div class="grow"><div class="progress"><i id="qProgress"></i></div></div><b id="qCount">1/10</b></div>
+    <div class="qCard" id="qCard"></div>
+  </section>
+
+  <section id="flashView" class="view">
+    <div class="fcTop"><button class="back" data-home>← Início</button><div class="grow"><div class="progress"><i id="fcProgress"></i></div></div><b id="fcCount">1/15</b></div>
+    <div class="fcWrap"><div class="flashCard" id="flashCard"><div class="face frontFace"><div class="fcLabel">Pergunta</div><strong id="fcFront"></strong><div class="tapHelp">Toque no cartão para virar</div></div><div class="face backFace"><div class="fcLabel">Resposta</div><strong id="fcBack"></strong><div class="tapHelp">Toque para voltar</div></div></div></div>
+    <div class="fcControls"><button class="review" id="fcReview">× Revisar</button><button class="know" id="fcKnow">✓ Sei</button></div>
+    <div class="fcNav"><button id="fcPrev">← Anterior</button><span id="fcDeckName"></span><button id="fcNext">Próximo →</button></div>
+  </section>
+
+  <footer>Funciona sem internet após o primeiro carregamento em servidor/HTTPS. Sons são sintetizados no navegador e não usam áudios de terceiros.</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const letters=['A','B','C','D','E'];
+const quizData={
+pt:[
+{q:'Leia: “A biblioteca estava silenciosa, mas as ideias faziam barulho na cabeça de Clara.” A frase sugere que Clara:',o:['estava intensamente envolvida em pensamentos.','não conseguia ouvir os ruídos da biblioteca.','pretendia conversar em voz alta.','sentia medo de permanecer no local.','queria abandonar imediatamente a leitura.'],a:0,h:'Observe o contraste entre “silenciosa” e “ideias faziam barulho”.',e:'O “barulho” é figurado: representa a intensa atividade mental da personagem.'},
+{q:'Assinale o sinônimo mais adequado de “essencial” em “A leitura é essencial à formação do estudante”.',o:['eventual','indispensável','secundário','dispensável','ocasional'],a:1,h:'Procure uma palavra que mantenha a ideia de necessidade.',e:'“Indispensável” preserva o sentido de algo necessário, fundamental.'},
+{q:'Em “A escola abriu portas para novos projetos”, a expressão “abriu portas” foi empregada em sentido:',o:['denotativo, indicando portas físicas.','técnico, referente à arquitetura escolar.','figurado, significando criação de oportunidades.','jurídico, relacionado ao acesso ao prédio.','literal, indicando mudança de horário.'],a:2,h:'Pergunte se houve, de fato, abertura de portas físicas.',e:'A expressão é figurada e equivale a “criou oportunidades”.'},
+{q:'Em “O vento sussurrava entre as árvores”, ocorre a figura de linguagem chamada:',o:['hipérbole','eufemismo','antítese','personificação','metonímia'],a:3,h:'Uma ação humana é atribuída a um elemento da natureza.',e:'“Sussurrar” é ação humana atribuída ao vento: personificação (prosopopeia).'},
+{q:'Assinale a alternativa em que todas as palavras estão grafadas corretamente.',o:['excessão, privilégio, análize','exceção, previlégio, análise','exceção, priviléjio, pesquiza','excessão, privilégio, pesquisa','exceção, privilégio, análise, pesquisa'],a:4,h:'Atenção a “exceção”, “privilégio”, “análise” e “pesquisa”.',e:'A alternativa E apresenta todas as grafias conforme a norma-padrão.'},
+{q:'Na frase “Os alunos estudaram muito ontem”, a palavra “muito” funciona como:',o:['advérbio','adjetivo','substantivo','pronome','preposição'],a:0,h:'Veja qual palavra “muito” modifica.',e:'“Muito” intensifica o verbo “estudaram”; portanto, é advérbio de intensidade.'},
+{q:'Assinale a frase correta quanto à concordância verbal.',o:['Fazem dois anos que estudo para concursos.','Faz dois anos que estudo para concursos.','Houveram muitos candidatos na sala.','Devem haver novas convocações.','Existe muitas razões para estudar.'],a:1,h:'O verbo “fazer”, indicando tempo decorrido, é impessoal.',e:'Em indicação de tempo, “fazer” fica no singular: “Faz dois anos”.'},
+{q:'Assinale a alternativa em que o emprego da crase está correto.',o:['Cheguei à pé à escola.','Entreguei o relatório à ela.','A professora referiu-se à aluna durante a reunião.','O curso ocorre de segunda à sexta.','Voltarei daqui à duas horas.'],a:2,h:'Crase ocorre quando a preposição “a” se combina com artigo feminino “a”.',e:'“Referir-se a” + “a aluna” = “referiu-se à aluna”.'},
+{q:'De acordo com a norma-padrão, assinale a frase correta quanto à regência verbal.',o:['Assisti o filme ontem.','Prefiro mais português do que matemática.','Cheguei na escola às oito horas.','Assistimos ao documentário sobre educação.','Obedeci o regulamento da instituição.'],a:3,h:'No sentido de “ver”, o verbo assistir rege preposição “a”.',e:'Na norma-padrão: “assistir a algo” → “Assistimos ao documentário”.'},
+{q:'Na redação oficial, é adequado priorizar:',o:['subjetividade e linguagem emotiva.','gírias e marcas de oralidade.','frases ambíguas para ampliar interpretações.','excesso de adjetivos e opinião pessoal.','clareza, concisão, impessoalidade e padronização.'],a:4,h:'Pense nos atributos que favorecem comunicação institucional objetiva.',e:'A redação oficial busca clareza, concisão, objetividade, impessoalidade e padronização.'}
+],
+math:[
+{q:'Qual é o resultado de 3/4 + 1/8?',o:['7/8','5/8','1','4/12','3/8'],a:0,h:'Transforme 3/4 em oitavos.',e:'3/4 = 6/8; 6/8 + 1/8 = 7/8.'},
+{q:'O mínimo múltiplo comum (MMC) de 12 e 18 é:',o:['24','36','48','54','72'],a:1,h:'Fatore: 12 = 2²·3 e 18 = 2·3².',e:'MMC = 2²·3² = 36.'},
+{q:'25% de 240 corresponde a:',o:['40','50','60','70','80'],a:2,h:'25% equivale a 1/4.',e:'240 ÷ 4 = 60.'},
+{q:'Se 5 livros custam R$ 75,00, mantendo o mesmo preço unitário, 8 livros custam:',o:['R$ 95,00','R$ 105,00','R$ 110,00','R$ 120,00','R$ 125,00'],a:3,h:'Descubra primeiro o preço de 1 livro.',e:'75 ÷ 5 = 15; 15 × 8 = R$ 120,00.'},
+{q:'Um aluno obteve nota 7 com peso 2 e nota 9 com peso 3. A média ponderada é:',o:['7,6','7,8','8,0','8,1','8,2'],a:4,h:'Some nota×peso e divida pela soma dos pesos.',e:'(7×2 + 9×3) ÷ 5 = 41 ÷ 5 = 8,2.'},
+{q:'Em juros simples, um capital de R$ 2.000 aplicado a 2% ao mês por 5 meses rende:',o:['R$ 200','R$ 180','R$ 220','R$ 250','R$ 300'],a:0,h:'Use J = C·i·t.',e:'J = 2000×0,02×5 = R$ 200.'},
+{q:'No sistema x + y = 10 e x − y = 4, os valores de x e y são:',o:['x=6, y=4','x=7, y=3','x=8, y=2','x=5, y=5','x=9, y=1'],a:1,h:'Some as duas equações.',e:'2x=14 → x=7; então y=3.'},
+{q:'A área de um retângulo de 8 m por 5 m é:',o:['13 m²','26 m²','40 m²','45 m²','80 m²'],a:2,h:'Área do retângulo = base × altura.',e:'8×5 = 40 m².'},
+{q:'Um triângulo retângulo tem catetos medindo 6 cm e 8 cm. A hipotenusa mede:',o:['9 cm','11 cm','12 cm','10 cm','14 cm'],a:3,h:'Use a²+b²=c².',e:'6²+8²=36+64=100; √100=10 cm.'},
+{q:'Observe a sequência: 2, 6, 12, 20, 30, __. O próximo termo é:',o:['34','36','38','40','42'],a:4,h:'Analise as diferenças: +4, +6, +8, +10...',e:'A próxima diferença é +12; 30+12=42.'}
+],
+spec:[
+{q:'Na BNCC, as competências gerais da Educação Básica articulam:',o:['conhecimentos, habilidades, atitudes e valores.','apenas conteúdos conceituais.','somente habilidades socioemocionais.','apenas competências digitais.','exclusivamente resultados de avaliações externas.'],a:0,h:'A noção de competência é ampla e mobiliza diferentes dimensões.',e:'A BNCC articula conhecimentos, habilidades, atitudes e valores para resolver demandas complexas.'},
+{q:'Em Paulo Freire, uma prática educativa coerente com a autonomia pressupõe que ensinar:',o:['é transmitir conteúdos prontos.','não é transferir conhecimento, mas criar possibilidades para sua produção.','dispensa rigor metodológico.','exige neutralidade política absoluta.','deve evitar diálogo para preservar a autoridade docente.'],a:1,h:'Freire rejeita a educação bancária.',e:'Para Freire, ensinar implica criar condições para produção/construção do conhecimento.'},
+{q:'Para José Carlos Libâneo, a didática pode ser compreendida como:',o:['um conjunto fixo de técnicas sem relação com fins sociais.','uma teoria restrita à avaliação escolar.','mediação entre fundamentos teóricos e a prática intencional de ensino.','atividade administrativa independente da aprendizagem.','substituição do currículo por métodos.'],a:2,h:'Pense na articulação teoria–prática.',e:'A didática orienta a prática docente, articulando finalidades, conteúdos, métodos e condições de ensino.'},
+{q:'A avaliação mediadora, em Jussara Hoffmann, caracteriza-se principalmente por:',o:['classificar estudantes por notas finais.','punir erros recorrentes.','separar avaliação e ensino.','acompanhar continuamente a aprendizagem e orientar intervenções.','eliminar registros e devolutivas.'],a:3,h:'A palavra-chave é “mediação”.',e:'A avaliação mediadora acompanha processos, interpreta avanços e dificuldades e orienta novas ações.'},
+{q:'Na perspectiva de Luckesi, a avaliação da aprendizagem deve assumir função predominantemente:',o:['seletiva.','punitiva.','classificatória.','meritocrática.','diagnóstica e orientadora da ação pedagógica.'],a:4,h:'Avaliar serve para compreender e intervir.',e:'Luckesi defende avaliação diagnóstica, inclusiva e voltada à melhoria da aprendizagem.'},
+{q:'Segundo Mantoan, a inclusão escolar exige prioritariamente:',o:['transformar a escola e suas práticas para acolher a diversidade.','adaptar o aluno à escola já existente.','separar estudantes por diagnóstico.','manter currículo idêntico sem acessibilidade.','restringir apoio especializado a classes segregadas.'],a:0,h:'Na inclusão, quem se reorganiza é a escola.',e:'A perspectiva inclusiva implica remover barreiras e reorganizar práticas para todos aprenderem juntos.'},
+{q:'Em “Alfaletrar”, Magda Soares defende que alfabetização e letramento:',o:['são processos incompatíveis.','são distintos, porém indissociáveis e devem ocorrer articuladamente.','devem ocorrer em etapas totalmente separadas.','dispensam ensino sistemático.','dependem apenas do contato espontâneo com textos.'],a:1,h:'Pense em sistema de escrita + usos sociais.',e:'Soares articula aprendizagem do sistema alfabético e participação em práticas sociais de leitura e escrita.'},
+{q:'Em Isabel Solé, uma estratégia de leitura envolve o leitor:',o:['apenas decodificando palavras.','memorizando o texto sem objetivo.','planejando, antecipando, monitorando e verificando a compreensão.','evitando formular hipóteses.','lendo todos os gêneros do mesmo modo.'],a:2,h:'Estratégias são ações conscientes de controle da compreensão.',e:'Solé enfatiza planejamento, antecipação, inferência, monitoramento e revisão da leitura.'},
+{q:'Para Delia Lerner, ler e escrever na escola devem ser tratados como:',o:['exercícios exclusivamente gramaticais.','tarefas de cópia sem destinatário.','atividades isoladas de treino.','práticas sociais com propósitos e interlocutores significativos.','habilidades restritas à alfabetização inicial.'],a:3,h:'A autora aproxima a escola dos usos sociais da cultura escrita.',e:'Lerner propõe situações didáticas que preservem finalidades sociais reais da leitura e da escrita.'},
+{q:'Na obra de Zabala, a prática educativa é melhor compreendida quando:',o:['conteúdos são trabalhados sem objetivos.','avaliação ocorre apenas ao final.','o método é sempre expositivo.','o aluno é receptor passivo.','objetivos, conteúdos, métodos, recursos, organização e avaliação são articulados.'],a:4,h:'A prática educativa é um sistema de elementos inter-relacionados.',e:'Zabala propõe uma visão integrada dos componentes da ação didática.'},
+{q:'Conforme o art. 205 da Constituição Federal, a educação é:',o:['direito de todos e dever do Estado e da família, com colaboração da sociedade.','dever exclusivo da família.','serviço facultativo do Estado.','direito restrito ao ensino obrigatório.','responsabilidade exclusiva dos Municípios.'],a:0,h:'O artigo combina direito, deveres e colaboração social.',e:'O art. 205 define a educação como direito de todos e dever do Estado e da família, com colaboração da sociedade.'},
+{q:'Entre os direitos educacionais previstos no ECA, está:',o:['seleção de alunos pela condição econômica.','igualdade de condições para acesso e permanência na escola.','proibição de contestar critérios avaliativos.','cobrança obrigatória no ensino público.','restrição da participação estudantil.'],a:1,h:'Veja o art. 53 do ECA.',e:'O ECA assegura igualdade de condições para acesso e permanência, além de outros direitos escolares.'},
+{q:'A Lei nº 10.639/2003 tornou obrigatório o ensino de:',o:['educação financeira.','história europeia contemporânea.','História e Cultura Afro-Brasileira.','educação midiática.','língua indígena em todas as escolas.'],a:2,h:'A lei alterou a LDB no campo das relações étnico-raciais.',e:'A Lei 10.639/2003 incluiu a obrigatoriedade de História e Cultura Afro-Brasileira.'},
+{q:'A Lei nº 11.645/2008 ampliou a LDB para incluir obrigatoriamente:',o:['somente história local.','apenas cultura africana.','apenas história indígena.','História e Cultura Afro-Brasileira e Indígena.','ensino religioso confessional.'],a:3,h:'Ela amplia a alteração promovida em 2003.',e:'A Lei 11.645/2008 determina o ensino de História e Cultura Afro-Brasileira e Indígena.'},
+{q:'A Lei Brasileira de Inclusão (Lei nº 13.146/2015) assegura, na educação:',o:['cobrança adicional por apoio em escolas privadas.','segregação como regra.','restrição de acessibilidade à educação básica.','dispensa de adaptações razoáveis.','sistema educacional inclusivo em todos os níveis e aprendizado ao longo da vida.'],a:4,h:'A LBI adota perspectiva de direitos e inclusão.',e:'A LBI garante sistema educacional inclusivo, acessibilidade e aprendizagem ao longo da vida.'},
+{q:'A Lei nº 13.185/2015 define bullying como intimidação sistemática caracterizada por:',o:['violência intencional e repetitiva, física ou psicológica, em contexto de desequilíbrio de poder.','qualquer conflito isolado entre colegas.','somente agressão física com lesão.','apenas ofensas ocorridas na internet.','toda discordância em sala de aula.'],a:0,h:'Observe repetição, intenção e desequilíbrio de poder.',e:'A intimidação sistemática envolve atos intencionais e repetitivos, físicos ou psicológicos, em relação de poder assimétrica.'},
+{q:'Para a Lei nº 13.257/2016, considera-se primeira infância o período que abrange:',o:['os primeiros 3 anos completos.','os primeiros 6 anos completos ou 72 meses de vida.','dos 6 aos 10 anos.','do nascimento aos 12 anos.','somente a etapa da Educação Infantil.'],a:1,h:'A lei fixa um limite etário expresso.',e:'O Marco Legal da Primeira Infância considera os primeiros 6 anos completos (72 meses).'},
+{q:'A Lei nº 13.722/2018 determina, em síntese:',o:['curso de primeiros socorros apenas para diretores.','capacitação única, sem reciclagem.','capacitação anual em noções básicas de primeiros socorros para professores e funcionários abrangidos.','substituição de profissionais de saúde por professores.','curso apenas para escolas públicas.'],a:2,h:'A lei alcança escolas públicas/privadas e recreação infantil.',e:'A lei prevê capacitação e reciclagem anual em primeiros socorros para profissionais abrangidos.'},
+{q:'A Política Nacional de Educação Digital, instituída pela Lei nº 14.533/2023, estrutura-se em eixos que incluem:',o:['apenas infraestrutura de internet.','somente robótica escolar.','exclusivamente ensino superior.','inclusão digital, educação digital escolar, capacitação/especialização e pesquisa/desenvolvimento em TICs.','substituição do ensino presencial por EaD.'],a:3,h:'São quatro eixos estruturantes.',e:'A PNED articula inclusão, educação escolar, qualificação e pesquisa/desenvolvimento em TICs.'},
+{q:'Segundo as diretrizes nacionais de 2025 sobre dispositivos digitais na escola, o uso pessoal não pedagógico por estudantes:',o:['é obrigatório em todos os intervalos.','é livre durante as aulas.','não pode ter qualquer exceção.','é decisão exclusiva de cada aluno.','é restringido na rotina escolar, preservadas hipóteses pedagógicas e exceções previstas.'],a:4,h:'A regra diferencia uso pedagógico e uso pessoal não pedagógico.',e:'A norma restringe o uso pessoal não pedagógico e preserva usos pedagógicos e situações excepcionais.'},
+{q:'Nas Diretrizes de 2025 para Educação Integral em Tempo Integral, a jornada em tempo integral corresponde, em regra, a pelo menos:',o:['7 horas diárias ou 35 horas semanais.','5 horas diárias ou 25 semanais.','6 horas diárias ou 30 semanais.','8 horas diárias obrigatoriamente.','40 horas semanais sem exceção.'],a:0,h:'A diretriz fixa parâmetro mínimo diário ou semanal.',e:'A jornada em tempo integral tem referência mínima de 7 horas diárias ou 35 horas semanais.'},
+{q:'Na pedagogia histórico-crítica, a sequência metodológica é usualmente apresentada como:',o:['diagnóstico, prova, nota, recuperação, promoção.','prática social inicial, problematização, instrumentalização, catarse e prática social final.','leitura, cópia, exercício, prova e revisão.','objetivo, método, recurso, tarefa e nota.','acolhimento, recreio, aula, avaliação e conselho.'],a:1,h:'Lembre do movimento dialético da prática à prática transformada.',e:'A formulação clássica articula prática social, problematização, instrumentalização, catarse e retorno à prática social.'},
+{q:'Em bell hooks, “ensinar a transgredir” associa educação principalmente a:',o:['neutralidade e silêncio em sala.','padronização de experiências.','prática de liberdade, diálogo e enfrentamento de relações de dominação.','memorização como centro da aprendizagem.','autoridade sem participação estudantil.'],a:2,h:'A autora articula educação, liberdade e voz dos sujeitos.',e:'hooks propõe pedagogia engajada, crítica, dialógica e comprometida com liberdade e transformação.'},
+{q:'Em Roxane Rojo, “letramentos múltiplos” aponta para:',o:['um único padrão de leitura e escrita.','uso exclusivo do livro impresso.','separação entre escola e cultura digital.','diversidade de práticas, linguagens, mídias e contextos sociais de leitura e escrita.','abandono da linguagem verbal.'],a:3,h:'Pense em pluralidade de linguagens e práticas sociais.',e:'Os letramentos múltiplos reconhecem diferentes linguagens, mídias, culturas e usos sociais.'},
+{q:'Na psicogênese da língua escrita, Ferreiro e Teberosky compreendem a criança como:',o:['receptora passiva de modelos gráficos.','dependente de memorização antes de pensar sobre a escrita.','incapaz de formular explicações próprias.','aprendiz que só progride após dominar todas as letras.','sujeito ativo que constrói hipóteses sobre o funcionamento da escrita.'],a:4,h:'A criança é sujeito epistêmico.',e:'A teoria destaca a construção ativa de hipóteses e a reorganização progressiva das concepções sobre escrita.'},
+{q:'Em Parra e Saiz, uma didática da matemática coerente com a aprendizagem significativa deve:',o:['propor situações-problema e valorizar estratégias, argumentação e construção de significados.','priorizar apenas repetição de algoritmos.','evitar discussão de procedimentos.','eliminar erros imediatamente sem analisá-los.','separar matemática de situações cotidianas.'],a:0,h:'O problema é motor da aprendizagem matemática.',e:'A resolução de problemas e a discussão de estratégias favorecem compreensão e produção de significados.'},
+{q:'Para Smole e Diniz, ler, escrever e resolver problemas em matemática:',o:['são habilidades independentes.','são práticas articuladas que desenvolvem compreensão, comunicação e raciocínio.','devem ocorrer apenas após dominar cálculos.','substituem o ensino de conceitos.','são exclusivas da língua portuguesa.'],a:1,h:'O título da obra já indica articulação.',e:'As três habilidades se complementam e tornam visíveis estratégias e raciocínios matemáticos.'},
+{q:'Na perspectiva de José Manuel Moran, o uso educacional das tecnologias deve ser:',o:['um fim em si mesmo.','centrado na exposição do professor.','crítico, significativo e integrado a metodologias que favoreçam participação e aprendizagem.','restrito a aulas de informática.','substituto automático da mediação docente.'],a:2,h:'Tecnologia é meio pedagógico, não objetivo isolado.',e:'Moran defende integração crítica e significativa das tecnologias a práticas ativas e contextualizadas.'},
+{q:'Para Celso Vasconcellos, o planejamento educacional é adequadamente entendido como:',o:['preenchimento burocrático sem relação com a prática.','plano rígido e imutável.','atividade exclusiva da direção.','processo intencional, participativo e crítico que articula ação pedagógica e PPP.','lista de conteúdos sem objetivos.'],a:3,h:'Planejar envolve reflexão, ação e participação.',e:'O planejamento articula diagnóstico, objetivos, ação, avaliação e projeto político-pedagógico.'},
+{q:'Entre princípios associados à Educação em Direitos Humanos estão:',o:['competição e padronização cultural.','neutralidade diante da discriminação.','segregação e disciplina punitiva.','homogeneização das identidades.','dignidade humana, igualdade de direitos, diversidade, democracia e sustentabilidade socioambiental.'],a:4,h:'As diretrizes partem da universalidade e indivisibilidade dos direitos.',e:'A EDH articula dignidade, igualdade, diversidade, laicidade, democracia, transversalidade e sustentabilidade.'}
+]};
+
+const flashData={
+pt:[
+['O que é coesão textual?','Ligação entre partes do texto por recursos linguísticos.'],
+['Sinônimo','Palavra de sentido igual ou semelhante.'],
+['Antônimo','Palavra de sentido oposto.'],
+['Sentido denotativo','Sentido literal, próprio da palavra.'],
+['Sentido conotativo','Sentido figurado, dependente do contexto.'],
+['Personificação','Atribuição de características humanas a seres não humanos.'],
+['Advérbio','Termo que modifica verbo, adjetivo ou outro advérbio.'],
+['Concordância verbal','Adequação do verbo ao sujeito em número e pessoa.'],
+['Concordância nominal','Adequação entre nomes e seus determinantes.'],
+['Regência verbal','Relação do verbo com seus complementos e preposições.'],
+['Crase','Fusão da preposição “a” com artigo/pronome iniciado por “a”.'],
+['Colocação pronominal','Posição dos pronomes átonos: próclise, mesóclise, ênclise.'],
+['Análise sintática','Estudo das funções dos termos na oração.'],
+['Pontuação','Sinais que organizam sentidos, pausas e relações sintáticas.'],
+['Redação oficial','Comunicação pública clara, concisa, objetiva e impessoal.']
+],
+math:[
+['MMC','Menor múltiplo comum entre dois ou mais números.'],
+['MDC','Maior divisor comum entre dois ou mais números.'],
+['Porcentagem','Razão com denominador 100.'],
+['Regra de três simples','Relação proporcional entre duas grandezas.'],
+['Média aritmética simples','Soma dos valores dividida pela quantidade.'],
+['Média ponderada','Soma de valor×peso dividida pela soma dos pesos.'],
+['Juros simples','J = C × i × t.'],
+['Área do retângulo','A = base × altura.'],
+['Perímetro','Soma das medidas dos lados.'],
+['Teorema de Pitágoras','Em triângulo retângulo: a² + b² = c².'],
+['Proporção','Igualdade entre duas razões.'],
+['Sistema de 1º grau','Conjunto de equações lineares resolvidas simultaneamente.'],
+['Sequência numérica','Lista ordenada de números segundo uma regularidade.'],
+['Diagrama lógico','Representação visual de relações entre conjuntos/proposições.'],
+['Raciocínio dedutivo','Conclusão obtida logicamente a partir de premissas.']
+],
+spec:[
+['BNCC: competência','Mobilização de conhecimentos, habilidades, atitudes e valores.'],
+['Freire: ensinar','Criar possibilidades para produção/construção do conhecimento.'],
+['Libâneo: didática','Mediação entre fundamentos teóricos e prática docente intencional.'],
+['Hoffmann: avaliação mediadora','Acompanhamento contínuo que orienta intervenções pedagógicas.'],
+['Luckesi: avaliação','Diagnóstica e orientadora; não mero instrumento classificatório.'],
+['Mantoan: inclusão','A escola se reorganiza para garantir participação e aprendizagem de todos.'],
+['Soares: alfaletrar','Alfabetização e letramento distintos, porém indissociáveis.'],
+['Solé: estratégias de leitura','Planejar, antecipar, monitorar, inferir, verificar e revisar.'],
+['Lerner: ler e escrever','Práticas sociais com finalidades e interlocutores reais.'],
+['Zabala: prática educativa','Articulação de objetivos, conteúdos, métodos, recursos e avaliação.'],
+['CF/88 art. 205','Educação: direito de todos; dever do Estado e da família.'],
+['ECA art. 53','Igualdade de acesso e permanência, respeito e participação escolar.'],
+['Lei 10.639/2003','Obrigatoriedade de História e Cultura Afro-Brasileira.'],
+['Lei 11.645/2008','Inclui História e Cultura Afro-Brasileira e Indígena.'],
+['LBI 13.146/2015','Sistema educacional inclusivo e acessibilidade em todos os níveis.'],
+['Lei 13.185/2015','Programa de combate à intimidação sistemática (bullying).'],
+['Lei 13.257/2016','Primeira infância: primeiros 6 anos completos (72 meses).'],
+['Lei 13.722/2018','Capacitação anual em noções básicas de primeiros socorros.'],
+['Lei 14.533/2023','Institui a Política Nacional de Educação Digital.'],
+['Res. CNE/CEB 2/2025','Regula dispositivos digitais e educação digital/midiática nas escolas.'],
+['Res. CNE/CEB 7/2025','Tempo integral: referência mínima de 7h/dia ou 35h/semana.'],
+['Saviani: método','Prática social, problematização, instrumentalização, catarse, prática social.'],
+['bell hooks','Educação como prática de liberdade e pedagogia engajada.'],
+['Rojo: letramentos múltiplos','Pluralidade de linguagens, mídias, culturas e práticas sociais.'],
+['Ferreiro e Teberosky','Criança constrói hipóteses sobre o sistema de escrita.'],
+['Parra e Saiz','Aprender matemática envolve problemas, estratégias e argumentação.'],
+['Smole e Diniz','Ler, escrever e resolver problemas são habilidades articuladas.'],
+['Moran: tecnologia','Uso crítico, significativo e integrado à aprendizagem.'],
+['Vasconcellos: planejamento','Processo intencional, crítico, participativo e articulado ao PPP.'],
+['Educação em Direitos Humanos','Dignidade, igualdade, diversidade, democracia e participação.']
+]};
+
+let soundOn=true, audioCtx=null;
+function ctx(){if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); return audioCtx}
+function tone(freq,dur=.09,type='sine',vol=.035,delay=0){if(!soundOn)return;try{const c=ctx(),o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,c.currentTime+delay);g.gain.exponentialRampToValueAtTime(vol,c.currentTime+delay+.01);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+delay+dur);o.connect(g).connect(c.destination);o.start(c.currentTime+delay);o.stop(c.currentTime+delay+dur+.02)}catch(e){}}
+function snd(kind){if(kind==='ok'){tone(660,.09,'sine',.04,0);tone(880,.1,'sine',.035,.08);tone(1100,.14,'sine',.03,.16)}else if(kind==='no'){tone(240,.12,'triangle',.04,0);tone(180,.18,'triangle',.03,.1)}else if(kind==='flip'){tone(620,.06,'sine',.02,0);tone(760,.06,'sine',.018,.05)}else tone(520,.05,'sine',.018,0)}
+
+document.getElementById('soundBtn').onclick=()=>{soundOn=!soundOn;document.getElementById('soundBtn').textContent=soundOn?'🔊 Sons':'🔇 Mudo';if(soundOn)snd('tap')};
+function maskCPF(v){v=v.replace(/\D/g,'').slice(0,11);v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');return v}
+function validCPF(v){const s=v.replace(/\D/g,'');if(s.length!==11||/^(\d)\1+$/.test(s))return false;let sum=0;for(let i=0;i<9;i++)sum+=+s[i]*(10-i);let d=(sum*10)%11;if(d===10)d=0;if(d!==+s[9])return false;sum=0;for(let i=0;i<10;i++)sum+=+s[i]*(11-i);d=(sum*10)%11;if(d===10)d=0;return d===+s[10]}
+const cpf=document.getElementById('cpf');cpf.addEventListener('input',()=>cpf.value=maskCPF(cpf.value));
+document.getElementById('saveProfile').onclick=()=>{const m=document.getElementById('cpfMsg');if(!cpf.value){m.className='helper';m.textContent='CPF opcional. Você pode estudar sem informar seus dados.';toast('Modo local sem CPF');return}if(validCPF(cpf.value)){m.className='helper';m.textContent='CPF válido. Ele fica apenas nesta sessão e não é salvo.';snd('ok');toast('CPF validado ✓')}else{m.className='helper error';m.textContent='CPF inválido. Confira os 11 dígitos.';snd('no')}};
+
+let stats=JSON.parse(localStorage.getItem('piraStats')||'{"answered":0,"correct":0}');
+function saveStats(){localStorage.setItem('piraStats',JSON.stringify(stats));updateStats()}
+function updateStats(){document.getElementById('stAnswered').textContent=stats.answered;document.getElementById('stCorrect').textContent=stats.correct;document.getElementById('stRate').textContent=stats.answered?Math.round(stats.correct/stats.answered*100)+'%':'0%'} updateStats();
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),1700)}
+function show(id){['home','quizView','flashView'].forEach(x=>document.getElementById(x).classList.toggle('active',x===id));document.getElementById('home').style.display=id==='home'?'block':'none';window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-home]').forEach(b=>b.onclick=()=>{snd('tap');show('home')});
+
+document.getElementById('flashToggle').onclick=()=>{snd('tap');const s=document.getElementById('flashSub');s.classList.toggle('open');document.getElementById('flashArrow').textContent=s.classList.contains('open')?'▴':'▾'};
+document.querySelectorAll('[data-quiz]').forEach(b=>b.onclick=()=>startQuiz(b.dataset.quiz));
+document.querySelectorAll('[data-flash]').forEach(b=>b.onclick=()=>startFlash(b.dataset.flash));
+
+let qDeck=[],qIndex=0,qScore=0,qLocked=false;
+const names={pt:'Língua Portuguesa',math:'Matemática e Raciocínio Lógico',spec:'Conhecimentos Específicos'};
+function startQuiz(type){snd('tap');qDeck=quizData[type];qIndex=0;qScore=0;qLocked=false;show('quizView');renderQ(type)}
+function renderQ(type){const q=qDeck[qIndex],card=document.getElementById('qCard');document.getElementById('qCount').textContent=`${qIndex+1}/${qDeck.length}`;document.getElementById('qProgress').style.width=(qIndex/qDeck.length*100)+'%';qLocked=false;card.innerHTML=`<div class="badge">${names[type]} • questão ${qIndex+1}</div><div class="qText">${q.q}</div><div class="opts">${q.o.map((x,i)=>`<button class="opt" data-i="${i}"><span class="letter">${letters[i]}</span><span>${x}</span></button>`).join('')}</div><button class="hintBtn">💡 Ver dica</button><div class="hint">${q.h}</div><div class="feedback"></div><div class="nextRow"><button class="nextBtn">${qIndex===qDeck.length-1?'Ver resultado':'Próxima →'}</button></div>`;
+card.querySelector('.hintBtn').onclick=()=>{snd('tap');card.querySelector('.hint').classList.toggle('show')};card.querySelectorAll('.opt').forEach(o=>o.onclick=()=>answerQ(+o.dataset.i,type));card.querySelector('.nextBtn').onclick=()=>{snd('tap');qIndex++;if(qIndex>=qDeck.length)return showResult(type);renderQ(type)} }
+function answerQ(i,type){if(qLocked)return;qLocked=true;const q=qDeck[qIndex],card=document.getElementById('qCard'),opts=[...card.querySelectorAll('.opt')];opts.forEach(x=>x.classList.add('locked'));opts[q.a].classList.add('correct');const fb=card.querySelector('.feedback');if(i===q.a){qScore++;stats.correct++;opts[i].classList.add('correct');fb.className='feedback show ok';fb.innerHTML='✅ <b>Correto!</b> '+q.e;snd('ok')}else{opts[i].classList.add('wrong');fb.className='feedback show no';fb.innerHTML=`❌ <b>Resposta correta: ${letters[q.a]}.</b> ${q.e}`;snd('no')}stats.answered++;saveStats();card.querySelector('.nextBtn').classList.add('show');document.getElementById('qProgress').style.width=((qIndex+1)/qDeck.length*100)+'%'}
+function showResult(type){const pct=Math.round(qScore/qDeck.length*100),card=document.getElementById('qCard');document.getElementById('qCount').textContent='Fim';document.getElementById('qProgress').style.width='100%';card.innerHTML=`<div class="result"><div class="scoreRing" style="--deg:${pct*3.6}deg"><b>${pct}%</b></div><h2>${qScore} de ${qDeck.length} acertos</h2><p>${pct>=80?'Excelente desempenho.':pct>=60?'Bom resultado. Revise os pontos errados.':'Use os flashcards e tente novamente.'}</p><button class="primary" id="again">Refazer ${names[type]}</button></div>`;document.getElementById('again').onclick=()=>startQuiz(type);pct>=70?snd('ok'):snd('no')}
+
+let fDeck=[],fIndex=0,fKnown=new Set(),fType='pt';
+function startFlash(type){snd('tap');fType=type;fDeck=flashData[type];fIndex=0;fKnown=new Set(JSON.parse(localStorage.getItem('known_'+type)||'[]'));show('flashView');renderFlash()}
+function renderFlash(){const c=fDeck[fIndex];document.getElementById('fcFront').textContent=c[0];document.getElementById('fcBack').textContent=c[1];document.getElementById('flashCard').classList.remove('flipped');document.getElementById('fcCount').textContent=`${fIndex+1}/${fDeck.length}`;document.getElementById('fcProgress').style.width=((fIndex+1)/fDeck.length*100)+'%';document.getElementById('fcDeckName').textContent=names[fType];document.getElementById('fcPrev').disabled=fIndex===0;document.getElementById('fcNext').disabled=fIndex===fDeck.length-1}
+document.getElementById('flashCard').onclick=()=>{snd('flip');document.getElementById('flashCard').classList.toggle('flipped')};
+document.getElementById('fcPrev').onclick=()=>{if(fIndex>0){snd('tap');fIndex--;renderFlash()}};document.getElementById('fcNext').onclick=()=>{if(fIndex<fDeck.length-1){snd('tap');fIndex++;renderFlash()}};
+document.getElementById('fcKnow').onclick=()=>{fKnown.add(fIndex);localStorage.setItem('known_'+fType,JSON.stringify([...fKnown]));snd('ok');toast('Marcado como “Sei”');if(fIndex<fDeck.length-1){fIndex++;renderFlash()}};
+document.getElementById('fcReview').onclick=()=>{fKnown.delete(fIndex);localStorage.setItem('known_'+fType,JSON.stringify([...fKnown]));snd('no');toast('Marcado para revisar');if(fIndex<fDeck.length-1){fIndex++;renderFlash()}};
+
+if('serviceWorker' in navigator && location.protocol!=='file:'){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>

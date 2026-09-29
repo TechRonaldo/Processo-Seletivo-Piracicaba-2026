@@ -1,0 +1,16 @@
+{
+  "name": "Piracicaba 2026 – Treino Professor",
+  "short_name": "Pira 2026",
+  "description": "Simulados e flashcards para Professor Substituto da Prefeitura de Piracicaba – Processo Seletivo 01/2026.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f6f8fc",
+  "theme_color": "#1cb0f6",
+  "icons": [
+    {"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
